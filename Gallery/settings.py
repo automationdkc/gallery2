@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 EXTERNAL_APPS = [
     'whitenoise.runserver_nostatic',
     'corsheaders',
-    'gallery',
+    'showroom',
     'rest_framework',
 ]
 
@@ -87,12 +87,31 @@ WSGI_APPLICATION = 'Gallery.wsgi.app'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+LOCAL_DATABASE = True # Set to True if you want to use local sqllite database
+
+if LOCAL_DATABASE:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'neondb',
+            'USER': 'neondb_owner',
+            'PASSWORD': 'npg_iG40yKocFmtw',
+            'HOST': 'ep-crimson-lab-a1spvuio-pooler.ap-southeast-1.aws.neon.tech',
+            'PORT': 5432,
+            'OPTIONS': {
+            'sslmode': 'require',
+            },
+            'DISABLE_SERVER_SIDE_CURSORS': True,
+        }
+    }
 
 
 # Password validation - Commenting out password validators so that even short passwords will work
@@ -130,6 +149,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

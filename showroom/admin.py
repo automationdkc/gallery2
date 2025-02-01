@@ -42,7 +42,7 @@ class StyleAdmin(admin.ModelAdmin):
 # Admin for Image
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('style','image', 'is_cover', 'uploaded_by', 'last_updated_by', 'created_at', 'updated_at')
-    search_fields = ('style__name')
+    search_fields = ('style__name',)
     list_filter = ('is_cover', 'uploaded_by', 'last_updated_by')
 
 # Register models with admin interface
