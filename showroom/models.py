@@ -40,7 +40,13 @@ class Category(TimeStampedModel):
     cover_image = models.ImageField(upload_to="category_cover_images", null=True, blank=True)
 
     def __str__(self):
-        return f"{self.name} ({self.parent.name})" if self.parent else f"{self.name} Highest Level"
+        names = [self.name]
+        current = self
+        while current.parent:
+            current = current.parent
+            names.append(current.name)
+        return " -> ".join(names)
+
 
 # Years Model
 class Year(TimeStampedModel):
