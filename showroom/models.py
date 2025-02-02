@@ -60,6 +60,9 @@ class MSRSeasonYear(TimeStampedModel):
     season = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='msr_seasons')
     year = models.ForeignKey(Year, on_delete=models.CASCADE, related_name='msr_seasons')
 
+    def __str__(self):
+        return f"{self.season.name} -> {self.year.year}"
+
 # Styles Model
 class Style(TimeStampedModel):
     name = models.CharField(max_length=255)
