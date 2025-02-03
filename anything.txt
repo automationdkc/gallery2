@@ -1,3 +1,5 @@
+pip install notebook 
+
 import os
 
 # Allow Django ORM queries inside Jupyter Notebook
